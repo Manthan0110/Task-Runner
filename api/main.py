@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from database import engine
 from sqlalchemy.orm import Session
-from database import dev_db
+from database import dev.db
 from fastapi import Depends, HTTPException
 from models import Base
 from routers import tasks
@@ -45,7 +45,7 @@ async def startup():
     start_worker_background()
 
 @app.post("/seed")
-def seed_database(db: Session = Depends(dev_db)):
+def seed_database(db: Session = Depends(dev.db)):
     try:
         run_seed(db)
         return {"status": "Database seeded successfully!"}
