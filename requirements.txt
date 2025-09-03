@@ -1,10 +1,14 @@
+pip>=25.2
+setuptools>=70
+wheel
+
 # --- FastAPI & Web ---
 fastapi==0.110.0
 uvicorn[standard]==0.29.0
 
 # --- Database ---
 sqlalchemy==2.0.29
-psycopg2-binary==2.9.9     # PostgreSQL driver
+psycopg2-binary==2.9.9 --only-binary=:all:
 sqlite-utils==3.36         # if you test locally with SQLite
 
 # --- Environment & Config ---
@@ -34,3 +38,4 @@ anyio==4.3.0               # FastAPI internal async support
 # --- Utilities ---
 typing-extensions==4.11.0
 python-multipart==0.0.9    # if you add file upload APIs later
+
