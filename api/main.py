@@ -3,12 +3,13 @@ from fastapi import FastAPI
 from database import engine
 from sqlalchemy.orm import Session
 from database import dev_db
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from models import Base
 from routers import tasks
 import seeds.seed as seeder
 # import asyncio  # not needed anymore, but safe to keep if you want
 from worker import start_worker_background
+from seeds.seed import run_seed
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
@@ -36,17 +37,22 @@ from routers import analytics
 app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
 
 
-@app.post("/seed")
-def run_seed(db: Session = Depends(dev_db)):
-    seeder.run_seed(db)  # wrap your seeding logic in a function
-    return {"status": "Database seeded!"}
-
 @app.on_event("startup")
 async def startup():
     if os.getenv("DISABLE_WORKER") == "1":
         return
     # No loop argument needed for start_worker_background
     start_worker_background()
+
+@app.post("/seed")
+def seed_database(db: Session = Depends(dev_db)):
+    try:
+        run_seed(db)
+        return {"status": "Database seeded successfully!"}
+    except Exception as e:
+        # log to console (Render logs)
+        print("❌ SEED ERROR:", str(e))
+        raise HTTPException(status_code=500, detail=f"Seed failed: {str(e)}")
 
 @app.get("/")
 def root():
