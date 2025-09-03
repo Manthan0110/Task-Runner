@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",   // proxied to FastAPI root by Vite
+  baseURL: import.meta.env.VITE_API_URL || "/api",   // proxied to FastAPI root by Vite
   timeout: 15000,
 });
 
