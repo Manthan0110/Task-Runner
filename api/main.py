@@ -43,13 +43,11 @@ async def startup():
     start_worker_background()
 
 @app.post("/seed")
-def seed_database(db: Session = Depends(dev.db)):
+def seed_database():
     try:
-        run_seed(db)
+        seed.run_seed()   # ✅ now it exists
         return {"status": "Database seeded successfully!"}
     except Exception as e:
-        # log to console (Render logs)
-        print("❌ SEED ERROR:", str(e))
         raise HTTPException(status_code=500, detail=f"Seed failed: {str(e)}")
 
 @app.get("/")
