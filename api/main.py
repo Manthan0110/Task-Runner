@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from database import engine
 from sqlalchemy.orm import Session
-from database import get_db
+from database import dev_db
 from fastapi import Depends
 from models import Base
 from routers import tasks
@@ -37,7 +37,7 @@ app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
 
 
 @app.post("/seed")
-def run_seed(db: Session = Depends(get_db)):
+def run_seed(db: Session = Depends(dev_db)):
     seeder.run_seed(db)  # wrap your seeding logic in a function
     return {"status": "Database seeded!"}
 
