@@ -13,7 +13,7 @@ sqlite-utils==3.36         # if you test locally with SQLite
 
 # --- Environment & Config ---
 python-dotenv==1.0.1
-pydantic==2.7.1
+pydantic>=2.7,<3.0
 email-validator==2.1.1     # for Pydantic EmailStr
 
 # --- Firebase Auth ---
@@ -38,5 +38,6 @@ anyio==4.3.0               # FastAPI internal async support
 # --- Utilities ---
 typing-extensions==4.11.0
 python-multipart==0.0.9    # if you add file upload APIs later
+
 
 
