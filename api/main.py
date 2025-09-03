@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from database import engine
 from models import Base
 from routers import tasks
+import seeds.seed as seeder
 # import asyncio  # not needed anymore, but safe to keep if you want
 from worker import start_worker_background
 
@@ -31,6 +32,11 @@ app.add_middleware(
 from routers import analytics
 app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
 
+
+@app.post("/seed")
+def run_seed(db: Session = Depends(get_db)):
+    seeder.run_seed(db)  # wrap your seeding logic in a function
+    return {"status": "Database seeded!"}
 
 @app.on_event("startup")
 async def startup():
