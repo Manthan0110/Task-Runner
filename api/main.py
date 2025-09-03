@@ -9,8 +9,6 @@ from routers import tasks
 import seeds.seed as seeder
 # import asyncio  # not needed anymore, but safe to keep if you want
 from worker import start_worker_background
-from seeds.seed import run_seed
-
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
