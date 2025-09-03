@@ -19,6 +19,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://task-runner.netlify.app",
     ],
     allow_origin_regex=None,      # set to r".*" only for quick debugging (not for prod)
     allow_credentials=True,
