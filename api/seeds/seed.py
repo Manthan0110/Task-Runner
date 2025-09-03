@@ -111,7 +111,11 @@ def main():
     finally:
         db.close()
 
-if __name__ == "__main__":
+# seeds/seed.py
+
+def run_seed():
+    """Helper for FastAPI /seed endpoint"""
     started = time.time()
-    main()
+    main()   # just call your existing seeding logic
     print(f"⏱️ Seed completed in ~{int(time.time()-started)}s")
+
