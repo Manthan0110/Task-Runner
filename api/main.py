@@ -6,6 +6,7 @@ from database import get_db
 from fastapi import Depends, HTTPException
 from models import Base
 from routers import tasks
+from seeds import seed
 import seeds.seed as seeder
 # import asyncio  # not needed anymore, but safe to keep if you want
 from worker import start_worker_background
