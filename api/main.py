@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI
 from database import engine
+from fastapi import Depends
 from models import Base
 from routers import tasks
 import seeds.seed as seeder
