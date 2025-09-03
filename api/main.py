@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from database import engine
 from sqlalchemy.orm import Session
-from database import dev.db
+from database import get_db
 from fastapi import Depends, HTTPException
 from models import Base
 from routers import tasks
